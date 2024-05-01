@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Registration Page</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Custom styles */
+    body {
+      background-image: url('image6.jpg'); /* Replace 'path_to_your_image.jpg' with the actual path to your image */
+      background-size: cover;
+      background-position: center;
+      padding: 20px;
+    }
+
+    .register-container {
+      max-width: 400px;
+      margin: auto;
+      margin-top: 50px;
+      background-color: rgba(255, 255, 255, 0.7); /* Background color for registration container */
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container register-container">
+  <h2 class="text-center mb-4">Register</h2>
+  <form id="registerForm">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" name="username" required>
+      <div class="invalid-feedback">Please enter a username.</div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+      <div class="invalid-feedback">Please enter a valid email address.</div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" name="password" required>
+      <div class="invalid-feedback">Please enter a password.</div>
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+      <div class="invalid-feedback">Passwords do not match.</div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Register</button>
+  </form>
+  <p class="text-center mt-3">Already have an account? <a href="http://127.0.0.1:5500/login.html">Login here</a></p>
+</div>
+
+<script>
+  document.getElementById('registerForm').addEventListener('submit', function(event) {
+    var username = document.getElementById('username');
+    var email = document.getElementById('email');
+    var password = document.getElementById('password');
+    var confirmPassword = document.getElementById('confirmPassword');
+
+    if (!username.value.trim()) {
+      username.classList.add('is-invalid');
+      event.preventDefault();
+    } else {
+      username.classList.remove('is-invalid');
+    }
+
+    if (!email.value.trim() || !isValidEmail(email.value.trim())) {
+      email.classList.add('is-invalid');
+      event.preventDefault();
+    } else {
+      email.classList.remove('is-invalid');
+    }
+
+    if (!password.value.trim()) {
+      password.classList.add('is-invalid');
+      event.preventDefault();
+    } else {
+      password.classList.remove('is-invalid');
+    }
+
+    if (password.value !== confirmPassword.value) {
+      confirmPassword.classList.add('is-invalid');
+      event.preventDefault();
+    } else {
+      confirmPassword.classList.remove('is-invalid');
+    }
+
+    if (username.value && email.value && isValidEmail(email.value) && password.value && password.value === confirmPassword.value) {
+      // Display success message
+      alert('Account created successfully!');
+    }
+  });
+
+  function isValidEmail(email) {
+    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+</script>
+
+
+</body>
+</html>
